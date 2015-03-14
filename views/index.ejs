@@ -24,8 +24,13 @@
 				<p id="drums-container">
 					<% drums.forEach(function(drum) { %>
 						<a id="<%= drum %>" class="btn btn-primary btn-lg" href="#" role="button"><%= drum %></a>
-					<% }) %>
+					<% }); %>
 				</p>
+				<div class="checkbox">
+					<label>
+					  <input type="checkbox" id="feedback-chk"> Feedback?
+					</label>
+				</div>
 			</div>
 			<div class="row">
 			  <div class="col-md-12">

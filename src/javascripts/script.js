@@ -10,13 +10,16 @@ $(document).ready(function() {
 		e.preventDefault();
 		var symbol = $(e.target).attr('id');
 		console.log('emit ' + symbol);
+		if ($('#feedback-chk').is(':checked')){
+			drumPlayer.play(symbol);
+		}
 		socket.emit('drum', symbol);
 	});
 
-	socket.on('drum', function(message){
+	socket.on('drum', function(symbol){
 
-		console.log(message);
-        drumPlayer[message].play();
+		console.log(symbol);
+		drumPlayer.play(symbol);
 
 	});
 
