@@ -3,6 +3,7 @@
 var debug = require('debug')('www');
 var app = require('../app');
 var socket = require('../lib/socket');
+var mqttClient = require('../lib/mqttClient');
 
 app.set('port', process.env.PORT || 3000);
 
@@ -11,3 +12,4 @@ var server = app.listen(app.get('port'), function() {
 });
 
 socket(server);
+mqttClient(process.env.CLOUDMQTT_URL || 'http://egzwomiv:6hkyuUqkv5Vq@m11.cloudmqtt.com:19984')

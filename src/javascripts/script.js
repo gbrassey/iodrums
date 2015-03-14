@@ -1,14 +1,15 @@
 'use strict';
 
-var $ = require('jquery');
-var socket = require('./lib/socket');
-var alert = require('./lib/alert');
+var $ = require('jquery'),
+	socket = require('./lib/socket'),
+	drumPlayer = require('./drumPlayer');
 
 $(document).ready(function() {
 
-	socket.on('vote', function(name){
+	socket.on('drum', function(message){
 
-		alert.play();
+		console.log(message);
+		drumPlayer[message].play();
 
 	});
 
