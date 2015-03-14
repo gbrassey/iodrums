@@ -19,6 +19,14 @@
 			    </div>
 			  </div>
 			</nav>
+			<div class="jumbotron">
+				<h1>Play the drums!</h1>
+				<p id="drums-container">
+					<% drums.forEach(function(drum) { %>
+						<a id="<%= drum %>" class="btn btn-primary btn-lg" href="#" role="button"><%= drum %></a>
+					<% }) %>
+				</p>
+			</div>
 			<div class="row">
 			  <div class="col-md-12">
 			  	<ul>
