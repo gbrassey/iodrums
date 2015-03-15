@@ -16,6 +16,11 @@ $(document).ready(function() {
 		socket.emit('drum', symbol);
 	});
 
+	$('#mqtt-test').on('click', function (e) {
+		e.preventDefault();
+		socket.emit('mqtt-test');
+	});
+
 	socket.on('drum', function(symbol){
 
 		console.log(symbol);
