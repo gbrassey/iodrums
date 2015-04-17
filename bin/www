@@ -4,6 +4,7 @@ var debug = require('debug')('www');
 var app = require('../app');
 var socket = require('../lib/socket');
 var mqttClient = require('../lib/mqttClient');
+var udp = require('../lib/udp');
 
 app.set('port', process.env.PORT || 3000);
 
@@ -12,4 +13,7 @@ var server = app.listen(app.get('port'), function() {
 });
 
 socket(server);
-mqttClient(process.env.CLOUDMQTT_URL || 'http://egzwomiv:6hkyuUqkv5Vq@m11.cloudmqtt.com:19984')
+
+mqttClient(process.env.CLOUDMQTT_URL || 'http://egzwomiv:6hkyuUqkv5Vq@m11.cloudmqtt.com:19984');
+
+udp.bind(4000, '0.0.0.0');
