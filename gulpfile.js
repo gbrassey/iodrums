@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-	sass = require('gulp-sass'),
+	stylus = require('gulp-stylus'),
 	browserify = require('browserify'),
 	source = require('vinyl-source-stream'),
 	uglify = require('gulp-uglify'),
@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 
 var config = {
 	npmSrc: './node_modules',
-	sassSrc: './src/sass',
+	stylusSrc: './src/stylus',
 	cssDir: './public/stylesheets',
 	jsSrc: './src/javascripts',
 	jsDir: './public/javascripts',
@@ -19,19 +19,11 @@ var config = {
 
 gulp.task('styles', function() {
 	var isProd = config.env === 'production';
-	var sassConfig = {
-		outputStyle: (isProd) ? 'compressed' : 'expanded',
-		sourceComments: (isProd) ? false : true
-	};
-	return gulp.src(config.sassSrc + '/style.scss')
-		.pipe(sass({
-			outputStyle: sassConfig.outputStyle,
-			sourceComments: sassConfig.sourceComments,
-			includePaths: [
-				'./src/sass',
-				config.npmSrc + '/bootstrap-sass/assets/stylesheets'
-			]
-		}) )
+
+	return gulp.src(config.stylusSrc + '/style.styl')
+		.pipe(stylus({
+			compress: (isProd) ? true : false
+		}))
 		.pipe(gulp.dest(config.cssDir));
 });
 
@@ -47,10 +39,10 @@ gulp.task('scripts', function() {
 
 gulp.task('watch-resources', function() {
 	var watchFiles = [
-		config.sassSrc + '/**/*.scss',
+		config.stylusSrc + '/**/*.styl',
 		config.jsSrc + '/**/*.js'
 	];
-     gulp.watch(watchFiles, ['build']); 
+	gulp.watch(watchFiles, ['build']); 
 });
 
 gulp.task('build', ['scripts', 'styles']);
