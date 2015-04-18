@@ -1,17 +1,18 @@
 'use strict';
 
-var $ = require('jquery'),
-	Drums = require('../../models/drums'),
+var drums = require('../../models/drums'),
 	drumPlayer = {};
 
-Drums.forEach(function(drum) {
+drums.forEach(function(drum) {
 	var audio = document.createElement('audio');
+
 	audio.preload = 'auto';
 	audio.src = 'audio/' + drum + '.mp3';
 	drumPlayer[drum] = audio;
 });
 
 var playNow = function playNow (symbol) {
+
 	if (drumPlayer[symbol].paused) {
 		drumPlayer[symbol].play();
 	} else {
@@ -20,11 +21,12 @@ var playNow = function playNow (symbol) {
 };
 
 drumPlayer.play = function play (symbol) {
+
 	if (drumPlayer[symbol]) {
 		playNow(symbol);
 	} else {
-		playNow(Drums[0]);
+		playNow(drums[0]);
 	}
-}
+};
 
 module.exports = drumPlayer;
