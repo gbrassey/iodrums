@@ -44,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(stylus.middleware({
   src: __dirname + '/src/stylus',
-  dest: 'public/stylesheets',
+  dest: __dirname + '/public/stylesheets',
   compile: compile
 }));
 app.use(express.static(path.join(__dirname, 'public')));
