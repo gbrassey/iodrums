@@ -1,20 +1,31 @@
 'use strict';
 
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express = require('express'),
+	path = require('path'),
+	logger = require('morgan'),
+	cookieParser = require('cookie-parser'),
+	bodyParser = require('body-parser'),
+	stylus = require('stylus'),
+	bootstrap = require('bootstrap-styl'),
+	nib = require('nib');
 // var mongoose = require('mongoose');
 
-var routes = require('./routes/index');
-var clientRoutes = require('./routes/client');
-var serverRoutes = require('./routes/server');
+var routes = require('./routes/index'),
+	clientRoutes = require('./routes/client'),
+	serverRoutes = require('./routes/server');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var config = require('./config')[process.env.NODE_ENV];
 if (config.seedDB) {
 	require('./config/seed');
+}
+
+function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .set('compress', process.env.NODE_ENV === 'production')
+    .use(bootstrap())
+    .use(nib());
 }
 
 var app = express();
@@ -31,6 +42,11 @@ if (process.env.NODE_ENV !== 'test') app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(stylus.middleware({
+  src: __dirname + '/src/stylus',
+  dest: 'public/stylesheets',
+  compile: compile
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

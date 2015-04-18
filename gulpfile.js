@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-	stylus = require('gulp-stylus'),
+	bootstrap = require('bootstrap-styl'),
 	browserify = require('browserify'),
 	source = require('vinyl-source-stream'),
 	uglify = require('gulp-uglify'),
@@ -17,16 +17,6 @@ var config = {
 	env: process.env.NODE_ENV || 'development'
 };
 
-gulp.task('styles', function() {
-	var isProd = config.env === 'production';
-
-	return gulp.src(config.stylusSrc + '/style.styl')
-		.pipe(stylus({
-			compress: (isProd) ? true : false
-		}))
-		.pipe(gulp.dest(config.cssDir));
-});
-
 gulp.task('scripts', function() {
 	return browserify(config.jsSrc + '/script.js')
 		.bundle()
@@ -39,12 +29,11 @@ gulp.task('scripts', function() {
 
 gulp.task('watch-resources', function() {
 	var watchFiles = [
-		config.stylusSrc + '/**/*.styl',
 		config.jsSrc + '/**/*.js'
 	];
 	gulp.watch(watchFiles, ['build']); 
 });
 
-gulp.task('build', ['scripts', 'styles']);
+gulp.task('build', ['scripts']);
   gulp.task('default', ['build']);
 gulp.task('watch', ['default', 'watch-resources']);
