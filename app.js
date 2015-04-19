@@ -5,6 +5,7 @@ var express = require('express'),
 	logger = require('morgan'),
 	cookieParser = require('cookie-parser'),
 	bodyParser = require('body-parser'),
+	favicon = require('serve-favicon'),
 	stylus = require('stylus'),
 	bootstrap = require('bootstrap-styl'),
 	nib = require('nib');
@@ -47,6 +48,7 @@ app.use(stylus.middleware({
   dest: __dirname + '/public/stylesheets',
   compile: compile
 }));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
