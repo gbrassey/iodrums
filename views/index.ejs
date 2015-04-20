@@ -22,8 +22,11 @@
 			<div class="jumbotron">
 				<h1>Play the drums!</h1>
 				<p id="drums-container">
-					<% drums.forEach(function(drum) { %>
-						<a id="<%= drum %>" class="btn btn-primary btn-lg" href="#" role="button"><%= drum %></a>
+					<% drums.forEach(function(drum) {
+
+						var uI = drum.name.indexOf(drum.shortcut);
+						%>
+						<a id="<%= drum.name %>" class="btn btn-primary btn-lg" href="#" role="button"><%= drum.name.substr(0, uI) %><u><%= drum.shortcut %></u><%= drum.name.substr(uI + 1, drum.name.length) %></a>
 					<% }); %>
 				</p>
 				<div class="checkbox">

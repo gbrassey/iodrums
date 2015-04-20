@@ -10,7 +10,6 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		var symbol = $(e.target).attr('id');
-		console.log('emit ' + symbol);
 
 		if ($('#feedback-chk').is(':checked')){
 			drumPlayer.play(symbol);
@@ -29,6 +28,12 @@ $(document).ready(function() {
 		console.log(message);
 
 		drumPlayer.play(message);
+	});
+
+	$(document).on('keydown', function (e) {
+		var shortcut = String.fromCharCode(e.which).toLowerCase();
+
+		drumPlayer.matchShortcut(shortcut);
 	});
 
 });
