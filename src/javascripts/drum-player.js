@@ -1,14 +1,17 @@
 'use strict';
 
-var drums = require('../../models/drums'),
+var $ = require('jquery'),
+	drums = require('../../models/drums'),
 	drumPlayer = {};
 
 drums.forEach(function(drum) {
 	var audio = document.createElement('audio');
 
 	audio.preload = 'auto';
-	audio.src = 'audio/' + drum + '.mp3';
-	drumPlayer[drum] = audio;
+	audio.src = 'audio/' + drum.name + '.mp3';
+	audio.id  = drum.name + '-audio';
+	drumPlayer[drum.name] = audio;
+	$('body').append(audio);
 });
 
 var playNow = function playNow (symbol) {
@@ -26,6 +29,18 @@ drumPlayer.play = function play (symbol) {
 		playNow(symbol);
 	} else {
 		playNow(drums[0]);
+	}
+};
+
+drumPlayer.matchShortcut = function matchShortcut (shortcut) {
+	var matched = drums.filter(function (drum) {
+		return drum.shortcut === shortcut;
+	});
+
+	if (matched.length) {
+		console.log(matched[0].name);
+
+		this.play(matched[0].name);
 	}
 };
 
