@@ -11,13 +11,7 @@ $(document).ready(function() {
 
 		var symbol = $(e.target).attr('id');
 
-		if ($('#feedback-chk').is(':checked')){
-			drumPlayer.play(symbol);
-		}
-
-		console.log('emit ' + symbol);
-
-		socket.emit('drum', symbol);
+		emitDrum(symbol);
 	});
 
 	$('#mqtt-test').on('click', function (e) {
@@ -35,7 +29,19 @@ $(document).ready(function() {
 	$(document).on('keydown', function (e) {
 		var shortcut = String.fromCharCode(e.which).toLowerCase();
 
-		drumPlayer.matchShortcut(shortcut);
+		emitDrum(drumPlayer.matchShortcut(shortcut));
 	});
+
+	function emitDrum (symbol) {
+
+		if ($('#feedback-chk').is(':checked')) {
+			drumPlayer.play(symbol);
+		}
+
+		console.log('emit ' + symbol);
+
+		socket.emit('drum', symbol);
+
+	}
 
 });

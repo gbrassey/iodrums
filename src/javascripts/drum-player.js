@@ -28,7 +28,7 @@ drumPlayer.play = function play (symbol) {
 	if (drumPlayer[symbol]) {
 		playNow(symbol);
 	} else {
-		playNow(drums[0]);
+		playNow(drums[0].name);
 	}
 };
 
@@ -37,11 +37,7 @@ drumPlayer.matchShortcut = function matchShortcut (shortcut) {
 		return drum.shortcut === shortcut;
 	});
 
-	if (matched.length) {
-		console.log(matched[0].name);
-
-		this.play(matched[0].name);
-	}
+	return (matched.length) ? matched[0].name : drums[0].name;
 };
 
 module.exports = drumPlayer;
