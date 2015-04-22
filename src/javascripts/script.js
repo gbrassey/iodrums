@@ -26,7 +26,7 @@ $(document).ready(function() {
 		drumPlayer.play(message);
 	});
 
-	$(document).on('keydown', function (e) {
+	$(document).on('keypress', function (e) {
 		var shortcut = String.fromCharCode(e.which).toLowerCase();
 
 		emitDrum(drumPlayer.matchShortcut(shortcut));

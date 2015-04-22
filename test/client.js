@@ -1,16 +1,25 @@
 'use strict';
 
+var app = require('../app'),
+	zombieHelpers = require('./zombie-helpers');
+
 describe('#drumEvents', function () {
-	var browser,
+	var server,
+		browser,
 		hihat;
 
 	before(function (done) {
+		app.set('port', 3001);
+		server = app.listen(app.get('port'));
+		Zombie.localhost('iod.gbrasey.com', app.get('port'));
+
 		browser = new Zombie();
 		browser.visit('/', done);
 	});
 
 	after(function() {
 		// browser.close();
+		server.close();
 	});
 
 	beforeEach(function (done) {
