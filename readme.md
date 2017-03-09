@@ -1,3 +1,5 @@
-# Internet of Drums
+# Internet of Drums 🎶
 
-This is a prototype drum broker.
+## [Demo](https://internet-of-drums.herokuapp.com/)
+
+Try connecting two browsers to play drums over web sockets 🎶
