@@ -1,5 +1,5 @@
 # Internet of Drums 🎶
 
-## [Demo](https://internet-of-drums.herokuapp.com/)
+## [Demo](http://iod.gbrassey.com/)
 
 Try connecting two browsers to play drums over web sockets 🎶
